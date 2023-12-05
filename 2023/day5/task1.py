@@ -26,3 +26,4 @@ with open("input", "r") as file:
 print("------")
 print(seeds)
 print(min(seeds))
+

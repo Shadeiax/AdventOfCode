@@ -20,3 +20,4 @@ with open("example", "r") as file:
 
 print(seeds)
 print(min(seeds))
+
