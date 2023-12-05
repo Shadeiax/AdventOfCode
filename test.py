@@ -1,10 +1,8 @@
-y = 3
-test = 1
+x = ["1", "2", "3"]
+y = {"1": "2",
+     "2": "3",
+     "3": "4"}
 
+for z in x:
+     z = y.get(z, z)
 
-
-if test or test+1 or test-1 == y:
-    print("ye")
-
-if 1:
-    print("he")
