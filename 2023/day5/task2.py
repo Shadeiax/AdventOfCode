@@ -1,22 +1,43 @@
 maps = []
-with open("example", "r") as file:
+current_map = []
+seeds = []
+with open("input", "r") as file:
     for n, line in enumerate(file.readlines()):
         line = line.strip()
-        if line == "":
-            continue
-        elif n == 0:
-            seeds = line.split(":")[1].split()
+        if n == 0:
+            a = line.split(":")[1].split()
+            ranges = []
+            for x in range(len(a)):
+                if x % 2 == 0:
+                    ranges.append((int(a[x]), int(a[x])+int(a[x+1])-1))
+
+
+            for start,stop in ranges:
+                ind = 0
+                while ind <= stop:
+                    seeds.append(start+ind)
+                    ind += 1
+
+
+
         elif line.endswith(":"):
-            for ind, seed in enumerate(seeds):
-                for new, old, length in maps:
-                    if old <= int(seed) <= old + length - 1:
-                        seed = str(new + int(seed) - old)
-                        break
-                seeds[ind] = seed
-            maps = []
+            current_map = []
+        elif line == "":
+            if current_map != []:
+                maps.append(current_map)
         else:
             new, old, length = line.split()
-            maps.append((int(new), int(old), int(length)))
+            current_map.append((int(new), int(old), int(length)))
+    maps.append(current_map)
 
-print(seeds)
-print(min(seeds))
+    results = []
+    for seed in seeds:
+        current = int(seed)
+        for map in maps:
+            for new, old, length in map:
+                    if old <= current <= old + length-1:
+                        current = new + current - old
+                        break
+        results.append(current)
+
+print(min(results))

@@ -15,14 +15,14 @@ with open("input", "r") as file:
             current_map.append((int(new), int(old), int(length)))
     maps.append(current_map)
 
-    for ind, seed in enumerate(seeds):
+    results = []
+    for seed in seeds:
+        current = int(seed)
         for map in maps:
             for new, old, length in map:
-                if old <= int(seed) <= old + length-1:
-                    seed = str(new + int(seed) - old)
-                    break
-            seeds[ind] = seed
+                    if old <= current <= old + length-1:
+                        current = new + current - old
+                        break
+        results.append(current)
 
-print("------")
-print(seeds)
-print(min(seeds))
+print(min(results))
