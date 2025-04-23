@@ -1,5 +1,14 @@
-a = "1 + 2 * 3"
-b = "1 * 2 + 3"
+x = "00...................................151"
 
-print(a.strip())
-print(b.strip())
+def new_compact(input):
+    nums = [i for i in input if i.isdigit()]
+    inds = [i for i in range(len(input)) if input[i] == "."]
+    new = [char for char in input]
+    for i in range(len(inds)):
+        new[inds[i]] = nums[len(nums) - 1 - i]
+    for i in range(len(inds)):
+        new.pop()
+    return "".join(new)
+
+x = new_compact(x)
+print(x)
