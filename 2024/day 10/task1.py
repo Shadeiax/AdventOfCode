@@ -7,14 +7,7 @@ input = [line.strip() for line in open(file)]
 
 
 def reformat(input):
-    new = []
-    for line in input:
-        new_line = []
-        for char in line:
-            new_line.append(char)
-        new.append(new_line)
-        new_line = []
-    return new
+    return [[char for char in line] for line in input]
 
 
 def evaluate_trailheads(input):
@@ -35,18 +28,9 @@ def evaluate_trailheads(input):
             for position in positions:
                 y, x = position
                 # check in all 4 directions
-                if y < len(input) - 1:
-                    if input[y + 1][x] == step:
-                        new_positions.add((y + 1, x))
-                if y > 0:
-                    if input[y - 1][x] == step:
-                        new_positions.add((y - 1, x))
-                if x < len(input[y]) - 1:
-                    if input[y][x + 1] == step:
-                        new_positions.add((y, x + 1))
-                if x > 0:
-                    if input[y][x - 1] == step:
-                        new_positions.add((y, x - 1))
+                new_positions.update((y + dy, x + dx) for dy, dx in [(1, 0), (-1, 0), (0, 1), (0, -1)]
+                                     if 0 <= y + dy < len(input) and 0 <= x + dx < len(input[y])
+                                     and input[y + dy][x + dx] == step)
             positions = new_positions.copy()
         sum += len(positions)
     return sum

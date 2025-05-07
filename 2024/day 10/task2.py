@@ -7,24 +7,11 @@ input = [line.strip() for line in open(file)]
 
 
 def reformat(input):
-    new = []
-    for line in input:
-        new_line = []
-        for char in line:
-            new_line.append(char)
-        new.append(new_line)
-        new_line = []
-    return new
+    return [[char for char in line] for line in input]
 
-
-def evaluate_trailheads(input):
+def evaluate_trailheads(input: list[list[str]]) -> int:
     # find all trailheads
-    trailheads = []
-    for y, line in enumerate(input):
-        for x, spot in enumerate(line):
-            if spot == "0":
-                trailheads.append((y, x))
-
+    trailheads = [(y, x) for y, line in enumerate(input) for x, spot in enumerate(line) if spot == "0"]
 
     # find routes for trailheads
     positions = trailheads.copy()
@@ -34,27 +21,15 @@ def evaluate_trailheads(input):
         for position in positions:
             y, x = position
             # check in all 4 directions
-            if y < len(input) - 1:
-                if input[y + 1][x] == step:
-                    new_positions.append((y + 1, x))
-            if y > 0:
-                if input[y - 1][x] == step:
-                    new_positions.append((y - 1, x))
-            if x < len(input[y]) - 1:
-                if input[y][x + 1] == step:
-                    new_positions.append((y, x + 1))
-            if x > 0:
-                if input[y][x - 1] == step:
-                    new_positions.append((y, x - 1))
+            new_positions.extend((y + dy, x + dx) for dy, dx in [(1, 0), (-1, 0), (0, 1), (0, -1)]
+                                 if 0 <= y + dy < len(input) and 0 <= x + dx < len(input[y])
+                                 and input[y + dy][x + dx] == step)
         positions = new_positions.copy()
-
     return len(positions)
 
 
 def listprint(list):
-    for i in range(len(list)):
-        print(list[i], end="\n")
-    print()
+    print(*list, sep="\n", end="\n\n")
 
 
 res = reformat(input)
