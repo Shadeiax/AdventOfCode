@@ -1,6 +1,5 @@
-x = "Button A: X+94, Y+34"
-print(x.split())
-print(x.split()[2][1:-1])
-a_x, a_y = map(int, x.split()[2][:1],x.split()[3][:1])
+a = [1, 2, 3, 4, 5]
+b = [2, 4, 5, 7]
 
-print(a_x, a_y)
+result = all(x in a for x in b)
+print(result)
