@@ -1,5 +1,6 @@
-a = [1, 2, 3, 4, 5]
-b = [2, 4, 5, 7]
+recipes = [(w, x, y, 100-w-x-y) for w in range(101) for x in range(101-w) for y in range(101-w-x) if w+x+y <= 100]
 
-result = all(x in a for x in b)
-print(result)
+
+
+
+print(recipes)

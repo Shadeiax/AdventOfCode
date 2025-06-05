@@ -35,7 +35,7 @@ def count_xmas_patterns(grid):
 
 
 array = []
-with open("input.txt", "r") as file:
+with open("boss.txt", "r") as file:
     for n, line in enumerate(file.readlines()):
         line = [x for x in line.strip()]
         array.append(line)

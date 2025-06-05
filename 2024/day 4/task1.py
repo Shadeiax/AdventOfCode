@@ -6,7 +6,7 @@ def arr_print(arr):
     for l in arr:
         print(l)
 
-with open("input.txt", "r") as file:
+with open("boss.txt", "r") as file:
     for n, line in enumerate(file.readlines()):
         line = [x for x in line.strip()]
         array.append(line)

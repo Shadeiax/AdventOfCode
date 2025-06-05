@@ -1,7 +1,7 @@
 nice = 0
 strings  = ["ab", "cd", "pq", "xy"]
 vowels = ["a", "e", "i", "o", "u"]
-with open("input", "r") as file:
+with open("input.txt", "r") as file:
     for n, line in enumerate(file.readlines()):
         naughty = False
         vowel = 0
